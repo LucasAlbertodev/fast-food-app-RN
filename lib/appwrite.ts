@@ -1,11 +1,16 @@
-import { Account, Avatars, Client, Databases, ID, Query, TablesDB } from 'react-native-appwrite';
+import { Account, Avatars, Client, Databases, ID, Query, Storage, TablesDB } from 'react-native-appwrite';
 
 export const appwriteConfig = {
     endpoint:process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT!,
     platform: "com.lucas.foodapp",
     projectId:process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!,
     databaseId:'690c1556002c39cf63ef',
-    userCollectionId: 'user'
+    bucketId:'690df560001942e6112e',
+    userCollectionId: 'user',
+    categoriesCollectionId: 'categories',
+    menuCollectionId: 'menu',
+    customizationCollectionId: 'customizations',
+    menuCustomizationCollectionId: 'menu_customizations'
 }
 
 export const client =  new Client();
@@ -18,6 +23,7 @@ client
 export const account = new Account(client);
 export const tableDB = new TablesDB(client);
 export const databases = new Databases(client);
+export const storage = new Storage(client);
 const avatars = new Avatars(client);
 
 interface CreateUserPrams {
@@ -81,5 +87,42 @@ export const getCurrentUser = async() => {
     } catch (error) {
         console.log(error)
         throw new Error(error as string)
+    }
+}
+
+interface GetMenuParams {
+    category: string;
+    query: string;
+}
+
+export const getMenu = async({category, query}:GetMenuParams) => {
+    try {
+        const queries:string[] = [];
+
+        if(category) queries.push(Query.equal('categories', category));
+        if(query) queries.push(Query.search('name', query));
+
+        const menus = await tableDB.listRows({
+            databaseId: appwriteConfig.databaseId,
+            tableId: appwriteConfig.menuCollectionId,
+            queries
+        })
+
+        return menus.rows;
+    } catch (error) {
+        throw new Error(error as string);
+    }
+};
+
+export const getCategories = async () => {
+    try {
+        const categories = await tableDB.listRows({
+            databaseId:appwriteConfig.databaseId,
+            tableId:appwriteConfig.categoriesCollectionId
+        })
+
+        return categories.rows;
+    } catch (error) {
+        throw new Error(error as string);
     }
 }
