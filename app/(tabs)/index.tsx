@@ -12,9 +12,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import CartButton from '@/components/CartButton';
 import { images, offers } from '@/constants';
-import './global.css';
+import { useAuthStore } from '@/store/authStore';
+import '../global.css';
 
 export default function Index() {
+  const {user} = useAuthStore();
+
+  
   return (
     <SafeAreaView className="flex-1 bg-white">
       <FlatList
@@ -55,7 +59,7 @@ export default function Index() {
                         source={images.arrowRight}
                         className="size-10"
                         resizeMode="contain"
-                        tintColor="#ffffff"
+                         tintColor="#ffffff"
                       />
                     </View>
                   </Fragment>
