@@ -12,7 +12,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import CartButton from '@/components/CartButton';
 import { images, offers } from '@/constants';
-import { useAuthStore } from '@/store/authStore';
+import { useAuthStore } from '@/store/auth/authStore';
 import '../global.css';
 
 export default function Index() {

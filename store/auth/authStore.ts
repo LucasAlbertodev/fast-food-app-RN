@@ -1,25 +1,6 @@
-import { Models } from "react-native-appwrite";
-import { create } from 'zustand';
-
 import { getCurrentUser } from "@/lib/appwrite";
-
-export type User  =  {
-    name: string,
-    email: string,
-    avatar: string,
-} & Models.Document
-
-interface AuthState {
-    isAuthenticated: boolean;
-    user: User | null;
-    isLoading: boolean;
-
-    setIsAuthenticated: (value: boolean) => void;
-    setUser: (user: User | null) => void;
-    setLoading: (loading: boolean) => void;
-
-    fetchAuthenticatedUsers: () => Promise<void>
-}
+import { create } from 'zustand';
+import { AuthState, User } from './interfaces/auth-actions';
 
 export const useAuthStore = create<AuthState>((set) => ({
     isAuthenticated: false,

@@ -1,14 +1,14 @@
 import { images } from '@/constants';
-import { useAuthStore } from '@/store/authStore';
+import { useAuthStore } from '@/store/auth/authStore';
 import { Redirect, Slot } from 'expo-router';
 import {
-  Dimensions,
-  Image,
-  ImageBackground,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  View,
+    Dimensions,
+    Image,
+    ImageBackground,
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    View,
 } from 'react-native';
 
 export default function AuthLayout() {

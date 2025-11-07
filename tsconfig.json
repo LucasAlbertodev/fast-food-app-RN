@@ -2,6 +2,11 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "esModuleInterop": true,
+    "outDir": "./build",
+    "target": "ES6",
+    "module": "ESNext",
+    "jsx": "react",
     "paths": {
       "@/*": [
         "./*"
@@ -14,5 +19,6 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "nativewind-env.d.ts"
-  ]
+, "components/CartItem.jsx"  ],
+  "exclude": ["**/__mocks__/*", "**/__tests__/*"]
 }

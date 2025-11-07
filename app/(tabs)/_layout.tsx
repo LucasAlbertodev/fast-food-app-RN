@@ -2,7 +2,7 @@ import { Redirect, Tabs } from 'expo-router';
 import { Image, ImageSourcePropType, Text, View } from 'react-native';
 
 import { images } from '@/constants';
-import { useAuthStore } from '@/store/authStore';
+import { useAuthStore } from '@/store/auth/authStore';
 import cn from "clsx";
 
 interface TabBarIconProps {
